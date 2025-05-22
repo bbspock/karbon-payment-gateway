@@ -2,6 +2,7 @@ import express from 'express';
 import { json } from 'body-parser';
 import { sequelize } from './utils/sequelize';
 import dotenv from 'dotenv';
+import paymentRoutes from './routes/paymentRoutes';
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ app.use(json());
 app.get('/health', (_, res) => {
   res.json({ status: 'ok' });
 });
+app.use(paymentRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
