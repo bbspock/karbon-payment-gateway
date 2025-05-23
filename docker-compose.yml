@@ -38,5 +38,20 @@ services:
     depends_on:
       - payment-orchestration
 
+  transaction-query:
+    build:
+      context: ./transaction-query-service
+    container_name: transaction_query_service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_NAME: karbon_payments
+    ports:
+      - "3003:3003"
+    depends_on:
+      - postgres
+
 volumes:
   pgdata:
