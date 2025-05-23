@@ -29,5 +29,14 @@ services:
     depends_on:
       - postgres
 
+  mock-gateway:
+    build:
+      context: ./mock-payment-gateway
+    container_name: mock_payment_gateway
+    ports:
+      - "3002:3002"
+    depends_on:
+      - payment-orchestration
+
 volumes:
   pgdata:

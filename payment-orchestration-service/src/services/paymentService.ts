@@ -1,6 +1,7 @@
 import { Transaction, TransactionStatus } from '../models/transaction';
 import { v4 as uuidv4 } from 'uuid';
 import crypto from 'crypto';
+import axios from 'axios';
 
 // Simulate in-memory idempotency cache (in production: use Redis or DB)
 const idempotencyStore: Record<string, { hash: string, response: object }> = {};
@@ -33,10 +34,13 @@ export const initiatePaymentService = async (
     status: TransactionStatus.PENDING,
   });
 
-  // Simulate async call to external gateway (will do real dispatch later)
-  setTimeout(() => {
-    console.log(`Simulating gateway call for txn ${karbon_transaction_id}`);
-  }, 500); // stub
+  // Mock payment gateway service call
+  await axios.post('http://mock-gateway:3002/mock-gateway/process-payment', {
+    karbon_transaction_id,
+    amount,
+    currency,
+    payment_method_details
+  });
 
   const response = {
     karbon_transaction_id,
