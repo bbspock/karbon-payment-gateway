@@ -35,7 +35,7 @@ export const initiatePaymentService = async (
   });
 
   // Mock payment gateway service call
-  await axios.post('http://mock-gateway:3002/mock-gateway/process-payment', {
+  axios.post('http://mock-gateway:3002/mock-gateway/process-payment', {
     karbon_transaction_id,
     amount,
     currency,
